@@ -1,0 +1,12 @@
+<map id="ccf::indexing::Indexer" name="ccf::indexing::Indexer">
+<area shape="rect" id="node1" title=" " alt="" coords="1108,151,1268,177"/>
+<area shape="rect" id="node2" href="$classccf_1_1indexing_1_1IndexingStrategies.html" title=" " alt="" coords="681,56,916,83"/>
+<area shape="rect" id="node3" href="$classccf_1_1AbstractNodeSubSystem.html" title=" " alt="" coords="355,5,564,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="373,56,546,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="115,56,272,83"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,56,44,83"/>
+<area shape="rect" id="node7" title=" " alt="" coords="683,107,914,149"/>
+<area shape="rect" id="node8" href="$classccf_1_1indexing_1_1TransactionFetcher.html" title=" " alt="" coords="366,107,553,149"/>
+<area shape="rect" id="node9" title=" " alt="" coords="704,173,893,200"/>
+<area shape="rect" id="node10" href="$structccf_1_1TxID.html" title=" " alt="" coords="759,224,838,251"/>
+</map>

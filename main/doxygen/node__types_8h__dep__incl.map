@@ -1,0 +1,21 @@
+<map id="src/node/node_types.h" name="src/node/node_types.h">
+<area shape="rect" id="node1" title=" " alt="" coords="283,5,451,32"/>
+<area shape="rect" id="node2" href="$raft_8h.html" title=" " alt="" coords="496,162,668,189"/>
+<area shape="rect" id="node4" href="$enclave_2enclave_8h.html" title=" " alt="" coords="408,661,571,688"/>
+<area shape="rect" id="node7" href="$node__connections_8h.html" title=" " alt="" coords="628,80,834,107"/>
+<area shape="rect" id="node9" href="$channels_8h.html" title=" " alt="" coords="70,80,221,107"/>
+<area shape="rect" id="node11" href="$node__to__node_8h.html" title=" " alt="" coords="275,80,459,107"/>
+<area shape="rect" id="node3" href="$node__state_8h.html" title=" " alt="" coords="278,505,443,531"/>
+<area shape="rect" id="node6" href="$gov__effects_8h.html" title=" " alt="" coords="327,587,519,613"/>
+<area shape="rect" id="node5" href="$enclave_2main_8cpp.html" title=" " alt="" coords="410,736,570,763"/>
+<area shape="rect" id="node8" href="$host_2main_8cpp.html" title=" " alt="" coords="692,162,829,189"/>
+<area shape="rect" id="node10" href="$node__to__node__channel__manager_8h.html" title=" " alt="" coords="45,155,217,196"/>
+<area shape="rect" id="node12" href="$forwarder_8h.html" title=" " alt="" coords="292,162,471,189"/>
+<area shape="rect" id="node13" href="$frontend_8h.html" title=" " alt="" coords="332,244,504,271"/>
+<area shape="rect" id="node14" href="$acme__challenge__frontend_8h.html" title=" " alt="" coords="366,319,552,360"/>
+<area shape="rect" id="node16" href="$member__frontend_8h.html" title=" " alt="" coords="768,497,928,539"/>
+<area shape="rect" id="node17" href="$node__frontend_8h.html" title=" " alt="" coords="576,326,787,353"/>
+<area shape="rect" id="node19" href="$user__frontend_8h.html" title=" " alt="" coords="45,587,252,613"/>
+<area shape="rect" id="node15" href="$ccf__acme__client_8h.html" title=" " alt="" coords="320,415,518,442"/>
+<area shape="rect" id="node18" href="$jwt__key__auto__refresh_8h.html" title=" " alt="" coords="593,408,760,449"/>
+</map>

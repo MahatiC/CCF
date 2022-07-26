@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$structconsensus_1_1AppendEntriesIndex.html" title=" " alt="" coords="5,5,197,47"/>
+<area shape="rect" id="node2" href="$structaft_1_1AppendEntries.html" title=" " alt="" coords="277,13,418,39"/>
+<area shape="rect" id="node3" href="$structaft_1_1RaftHeader.html" title=" " alt="" coords="41,93,161,119"/>
+<area shape="rect" id="node4" href="$structaft_1_1AppendEntriesResponse.html" title=" " alt="" coords="245,63,449,90"/>
+<area shape="rect" id="node5" href="$structaft_1_1RequestVote.html" title=" " alt="" coords="283,114,412,141"/>
+<area shape="rect" id="node6" href="$structaft_1_1RequestVoteResponse.html" title=" " alt="" coords="251,165,443,191"/>
+</map>

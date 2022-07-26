@@ -1,0 +1,8 @@
+<map id="quic::QUICEndpoint" name="quic::QUICEndpoint">
+<area shape="rect" id="node1" title=" " alt="" coords="192,228,339,255"/>
+<area shape="rect" id="node2" href="$classccf_1_1Endpoint.html" title=" " alt="" coords="42,117,147,143"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,184,47"/>
+<area shape="rect" id="node4" title=" " alt="" coords="171,109,359,151"/>
+<area shape="rect" id="node5" title=" " alt="" coords="383,117,595,143"/>
+<area shape="rect" id="node6" href="$structPendingIO.html" title="Pending writes on both host and enclave, with data, length and destination address." alt="" coords="426,13,553,39"/>
+</map>

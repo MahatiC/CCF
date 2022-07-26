@@ -1,0 +1,16 @@
+<map id="src/ds/pending_io.h" name="src/ds/pending_io.h">
+<area shape="rect" id="node1" title=" " alt="" coords="273,5,419,32"/>
+<area shape="rect" id="node2" href="$tcp_8h.html" title=" " alt="" coords="155,80,265,107"/>
+<area shape="rect" id="node6" href="$udp_8h.html" title=" " alt="" coords="289,80,403,107"/>
+<area shape="rect" id="node7" href="$quic__endpoint_8h.html" title=" " alt="" coords="451,80,630,107"/>
+<area shape="rect" id="node3" href="$node__connections_8h.html" title=" " alt="" coords="5,155,212,181"/>
+<area shape="rect" id="node5" href="$rpc__connections_8h.html" title=" " alt="" coords="237,155,431,181"/>
+<area shape="rect" id="node4" href="$host_2main_8cpp.html" title=" " alt="" coords="141,229,279,256"/>
+<area shape="rect" id="node8" href="$rpc__sessions_8h.html" title=" " alt="" coords="455,155,650,181"/>
+<area shape="rect" id="node9" href="$enclave_2enclave_8h.html" title=" " alt="" coords="362,453,525,480"/>
+<area shape="rect" id="node11" href="$ccf__acme__client_8h.html" title=" " alt="" coords="385,229,584,256"/>
+<area shape="rect" id="node12" href="$node__state_8h.html" title=" " alt="" coords="494,304,659,331"/>
+<area shape="rect" id="node14" href="$resharing_8h.html" title=" " alt="" coords="658,229,813,256"/>
+<area shape="rect" id="node10" href="$enclave_2main_8cpp.html" title=" " alt="" coords="363,528,523,555"/>
+<area shape="rect" id="node13" href="$gov__effects_8h.html" title=" " alt="" coords="481,379,673,405"/>
+</map>

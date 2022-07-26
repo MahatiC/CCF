@@ -1,0 +1,14 @@
+<map id="tpcc::Customer" name="tpcc::Customer">
+<area shape="rect" id="node1" title=" " alt="" coords="331,326,451,353"/>
+<area shape="rect" id="node2" title=" " alt="" coords="33,5,198,47"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,71,225,98"/>
+<area shape="rect" id="node4" title=" " alt="" coords="33,123,198,164"/>
+<area shape="rect" id="node5" title=" " alt="" coords="22,188,209,229"/>
+<area shape="rect" id="node6" title=" " alt="" coords="22,253,209,295"/>
+<area shape="rect" id="node7" title=" " alt="" coords="22,319,209,360"/>
+<area shape="rect" id="node8" title=" " alt="" coords="22,384,209,425"/>
+<area shape="rect" id="node9" title=" " alt="" coords="8,450,223,477"/>
+<area shape="rect" id="node10" title=" " alt="" coords="15,501,216,543"/>
+<area shape="rect" id="node11" title=" " alt="" coords="7,567,224,594"/>
+<area shape="rect" id="node12" title=" " alt="" coords="33,619,198,660"/>
+</map>
