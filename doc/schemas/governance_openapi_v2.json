@@ -1,0 +1,2249 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This API is used to submit and query proposals which affect CCF's public governance tables.",
+    "title": "CCF Governance API",
+    "version": "2.19.0"
+  },
+  "paths": {
+    "/gov/ack": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Auto-generated request body schema",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/StateDigest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Default response description"
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "security": [
+          {
+            "member_signature": []
+          },
+          {
+            "member_cose_sign1": []
+          }
+        ],
+        "summary": "Provide a member endorsement of a service state digest",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/always"
+        }
+      }
+    },
+    "/gov/ack/update_state_digest": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/StateDigest"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "security": [
+          {
+            "member_signature": []
+          },
+          {
+            "member_cose_sign1": []
+          }
+        ],
+        "summary": "Update and fetch a service state digest, for the purpose of member endorsement",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/always"
+        }
+      }
+    },
+    "/gov/commit": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "view_history",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "maximum": 18446744073709552000,
+            "minimum": 0,
+            "name": "view_history_since",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/GetCommit__Out"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "description": "Latest transaction ID that has been committed on the service",
+        "summary": "Current commit level",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/constitution": {
+      "get": {
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/cose_history": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/MemberId_to_base64string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/cose_recent_proposals": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/history": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/MemberId_to_SignedReq"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/js_runtime_options": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/JSRuntimeOptions"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/jwt/issuers": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_JwtIssuerMetadata"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/jwt/public_signing_key_issuer": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/jwt/public_signing_keys": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_base64string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/members/acks": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/MemberId_to_MemberAck"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/members/certs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/MemberId_to_Pem"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/members/encryption_public_keys": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/MemberId_to_Pem"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/members/info": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/MemberId_to_MemberDetails"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/modules": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/modules_quickjs_bytecode": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_base64string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/modules_quickjs_version": {
+      "get": {
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/nodes/code_ids": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/CodeDigest_to_CodeStatus"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/nodes/endorsed_certificates": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/NodeId_to_Pem"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/nodes/info": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/NodeId_to_NodeInfo"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/nodes/snp/host_data": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/Sha256Digest_to_string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/nodes/snp/measurements": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/CodeDigest_to_CodeStatus"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/proposals": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_base64string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/proposals_info": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_ProposalInfo"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/service/acme_certificates": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_Pem"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/service/config": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/service/info": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/ServiceInfo"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/service/previous_service_identity": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/Pem"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/tls/ca_cert_bundles": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_string"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/users/certs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/UserId_to_Pem"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/kv/users/info": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/UserId_to_UserDetails"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/proposals": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/string_to_ProposalInfo"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "summary": "Proposed changes to the service pending resolution",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Auto-generated request body schema",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfoSummary"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "security": [
+          {
+            "member_signature": []
+          },
+          {
+            "member_cose_sign1": []
+          }
+        ],
+        "summary": "Submit a proposed change to the service",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/always"
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "proposal_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfo"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "summary": "Information about a proposed change to the service",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/actions": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "proposal_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "summary": "Actions contained in a proposed change to the service",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/ballots": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "proposal_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Auto-generated request body schema",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Ballot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfoSummary"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "security": [
+          {
+            "member_signature": []
+          },
+          {
+            "member_cose_sign1": []
+          }
+        ],
+        "summary": "Ballots submitted against a proposed change to the service",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/always"
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/ballots/{member_id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "proposal_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "member_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/Ballot"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "summary": "Ballot for a given member about a proposed change to the service",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/withdraw": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "proposal_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfo"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "security": [
+          {
+            "member_signature": []
+          },
+          {
+            "member_cose_sign1": []
+          }
+        ],
+        "summary": "Withdraw a proposed change to the service",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/always"
+        }
+      }
+    },
+    "/gov/receipt": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "transaction_id",
+            "pattern": "^[0-9]+\\.[0-9]+$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/json"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "description": "A signed statement from the service over a transaction entry in the ledger",
+        "summary": "Receipt for a transaction",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    },
+    "/gov/recovery_share": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/GetRecoveryShare__Out"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "security": [
+          {
+            "member_signature": []
+          },
+          {
+            "member_cose_sign1": []
+          }
+        ],
+        "summary": "A member's recovery share",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/always"
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Auto-generated request body schema",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SubmitRecoveryShare__In"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/SubmitRecoveryShare__Out"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "security": [
+          {
+            "member_signature": []
+          },
+          {
+            "member_cose_sign1": []
+          }
+        ],
+        "summary": "Provide a recovery share for the purpose of completing a service recovery",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/always"
+        }
+      }
+    },
+    "/gov/tx": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "transaction_id",
+            "pattern": "^[0-9]+\\.[0-9]+$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default response description",
+            "schema": {
+              "$ref": "#/definitions/GetTxStatus__Out"
+            }
+          },
+          "default": {
+            "description": "An error occurred",
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "description": "Possible statuses returned are Unknown, Pending, Committed or Invalid.",
+        "summary": "Current status of a transaction",
+        "x-ccf-forwarding": {
+          "$ref": "#/x-components/x-ccf-forwarding/sometimes"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "properties": {
+        "args": {
+          "$ref": "#/definitions/json"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "name",
+        "args"
+      ],
+      "type": "object"
+    },
+    "Action_array": {
+      "items": {
+        "$ref": "#/definitions/Action"
+      },
+      "type": "array"
+    },
+    "Ballot": {
+      "properties": {
+        "ballot": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "ballot"
+      ],
+      "type": "object"
+    },
+    "CCFError": {
+      "properties": {
+        "error": {
+          "properties": {
+            "code": {
+              "description": "Response error code. CCF error codes: https://microsoft.github.io/CCF/main/operations/troubleshooting.html#error-codes",
+              "type": "string"
+            },
+            "message": {
+              "description": "Response error message",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "CodeDigest": {
+      "format": "hex",
+      "pattern": "^[a-f0-9]+$",
+      "type": "string"
+    },
+    "CodeDigest_to_CodeStatus": {
+      "items": {
+        "items": {},
+        "maxItems": 2,
+        "minItems": 2,
+        "type": "array"
+      },
+      "type": "array"
+    },
+    "CodeStatus": {
+      "enum": [
+        "AllowedToJoin"
+      ],
+      "type": "string"
+    },
+    "ConsensusType": {
+      "enum": [
+        "CFT",
+        "BFT"
+      ],
+      "type": "string"
+    },
+    "Failure": {
+      "properties": {
+        "reason": {
+          "$ref": "#/definitions/string"
+        },
+        "trace": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "reason"
+      ],
+      "type": "object"
+    },
+    "GetCommit__Out": {
+      "properties": {
+        "transaction_id": {
+          "$ref": "#/definitions/TransactionId"
+        },
+        "view_history": {
+          "$ref": "#/definitions/TransactionId_array"
+        }
+      },
+      "required": [
+        "transaction_id"
+      ],
+      "type": "object"
+    },
+    "GetRecoveryShare__Out": {
+      "properties": {
+        "encrypted_share": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "encrypted_share"
+      ],
+      "type": "object"
+    },
+    "GetTxStatus__Out": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TxStatus"
+        },
+        "transaction_id": {
+          "$ref": "#/definitions/TransactionId"
+        }
+      },
+      "required": [
+        "transaction_id",
+        "status"
+      ],
+      "type": "object"
+    },
+    "JSRuntimeOptions": {
+      "properties": {
+        "max_execution_time_ms": {
+          "$ref": "#/definitions/uint64"
+        },
+        "max_heap_bytes": {
+          "$ref": "#/definitions/uint64"
+        },
+        "max_stack_bytes": {
+          "$ref": "#/definitions/uint64"
+        }
+      },
+      "required": [
+        "max_heap_bytes",
+        "max_stack_bytes",
+        "max_execution_time_ms"
+      ],
+      "type": "object"
+    },
+    "JwtIssuerKeyFilter": {
+      "enum": [
+        "all",
+        "sgx"
+      ],
+      "type": "string"
+    },
+    "JwtIssuerKeyPolicy": {
+      "properties": {
+        "sgx_claims": {
+          "$ref": "#/definitions/string_to_string"
+        }
+      },
+      "required": [
+        "sgx_claims"
+      ],
+      "type": "object"
+    },
+    "JwtIssuerMetadata": {
+      "properties": {
+        "auto_refresh": {
+          "$ref": "#/definitions/boolean"
+        },
+        "ca_cert_bundle_name": {
+          "$ref": "#/definitions/string"
+        },
+        "key_filter": {
+          "$ref": "#/definitions/JwtIssuerKeyFilter"
+        },
+        "key_policy": {
+          "$ref": "#/definitions/JwtIssuerKeyPolicy"
+        }
+      },
+      "required": [
+        "key_filter"
+      ],
+      "type": "object"
+    },
+    "MDType": {
+      "enum": [
+        "NONE",
+        "SHA1",
+        "SHA256",
+        "SHA384",
+        "SHA512"
+      ],
+      "type": "string"
+    },
+    "MemberAck": {
+      "properties": {
+        "cose_sign1_req": {
+          "$ref": "#/definitions/base64string"
+        },
+        "signed_req": {
+          "$ref": "#/definitions/SignedReq"
+        },
+        "state_digest": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "state_digest"
+      ],
+      "type": "object"
+    },
+    "MemberDetails": {
+      "properties": {
+        "member_data": {
+          "$ref": "#/definitions/json"
+        },
+        "status": {
+          "$ref": "#/definitions/MemberStatus"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "MemberId": {
+      "format": "hex",
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "MemberId_to_Failure": {
+      "additionalProperties": {
+        "$ref": "#/definitions/Failure"
+      },
+      "type": "object"
+    },
+    "MemberId_to_MemberAck": {
+      "additionalProperties": {
+        "$ref": "#/definitions/MemberAck"
+      },
+      "type": "object"
+    },
+    "MemberId_to_MemberDetails": {
+      "additionalProperties": {
+        "$ref": "#/definitions/MemberDetails"
+      },
+      "type": "object"
+    },
+    "MemberId_to_Pem": {
+      "additionalProperties": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "object"
+    },
+    "MemberId_to_SignedReq": {
+      "additionalProperties": {
+        "$ref": "#/definitions/SignedReq"
+      },
+      "type": "object"
+    },
+    "MemberId_to_base64string": {
+      "additionalProperties": {
+        "$ref": "#/definitions/base64string"
+      },
+      "type": "object"
+    },
+    "MemberId_to_boolean": {
+      "additionalProperties": {
+        "$ref": "#/definitions/boolean"
+      },
+      "type": "object"
+    },
+    "MemberId_to_string": {
+      "additionalProperties": {
+        "$ref": "#/definitions/string"
+      },
+      "type": "object"
+    },
+    "MemberStatus": {
+      "enum": [
+        "Accepted",
+        "Active"
+      ],
+      "type": "string"
+    },
+    "NodeId_to_NodeInfo": {
+      "additionalProperties": {
+        "$ref": "#/definitions/NodeInfo"
+      },
+      "type": "object"
+    },
+    "NodeId_to_Pem": {
+      "additionalProperties": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "object"
+    },
+    "NodeInfo": {
+      "properties": {
+        "acme": {
+          "properties": {
+            "configurations": {
+              "additionalProperties": {
+                "properties": {
+                  "ca_certs": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "challenge_type": {
+                    "type": "string"
+                  },
+                  "contact": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "directory_url": {
+                    "type": "string"
+                  },
+                  "service_dns_name": {
+                    "type": "string"
+                  },
+                  "terms_of_service_agreed": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "ca_certs",
+                  "directory_url",
+                  "service_dns_name",
+                  "contact",
+                  "terms_of_service_agreed",
+                  "challenge_type"
+                ],
+                "type": "object"
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "configurations"
+          ],
+          "type": "object"
+        },
+        "cert": {
+          "$ref": "#/definitions/Pem"
+        },
+        "certificate_signing_request": {
+          "$ref": "#/definitions/Pem"
+        },
+        "code_digest": {
+          "$ref": "#/definitions/string"
+        },
+        "encryption_pub_key": {
+          "$ref": "#/definitions/Pem"
+        },
+        "ledger_secret_seqno": {
+          "$ref": "#/definitions/uint64"
+        },
+        "node_data": {
+          "$ref": "#/definitions/json"
+        },
+        "node_to_node_interface": {
+          "properties": {
+            "accepted_endpoints": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "app_protocol": {
+              "enum": [
+                "HTTP1",
+                "HTTP2"
+              ],
+              "type": "string"
+            },
+            "bind_address": {
+              "type": "string"
+            },
+            "endorsement": {
+              "properties": {
+                "acme_configuration": {
+                  "type": "string"
+                },
+                "authority": {
+                  "enum": [
+                    "Node",
+                    "Service",
+                    "ACME",
+                    "Unsecured"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "authority"
+              ],
+              "type": "object"
+            },
+            "http_configuration": {
+              "properties": {
+                "initial_window_size": {
+                  "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                  "type": "string"
+                },
+                "max_body_size": {
+                  "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                  "type": "string"
+                },
+                "max_concurrent_streams_count": {
+                  "maximum": 18446744073709552000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "max_frame_size": {
+                  "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                  "type": "string"
+                },
+                "max_header_size": {
+                  "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                  "type": "string"
+                },
+                "max_headers_count": {
+                  "maximum": 4294967295,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "max_open_sessions_hard": {
+              "maximum": 18446744073709552000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "max_open_sessions_soft": {
+              "maximum": 18446744073709552000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "protocol": {
+              "type": "string"
+            },
+            "published_address": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "bind_address"
+          ],
+          "type": "object"
+        },
+        "public_key": {
+          "$ref": "#/definitions/Pem"
+        },
+        "quote_info": {
+          "$ref": "#/definitions/QuoteInfo"
+        },
+        "retired_committed": {
+          "$ref": "#/definitions/boolean"
+        },
+        "rpc_interfaces": {
+          "additionalProperties": {
+            "properties": {
+              "accepted_endpoints": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "app_protocol": {
+                "enum": [
+                  "HTTP1",
+                  "HTTP2"
+                ],
+                "type": "string"
+              },
+              "bind_address": {
+                "type": "string"
+              },
+              "endorsement": {
+                "properties": {
+                  "acme_configuration": {
+                    "type": "string"
+                  },
+                  "authority": {
+                    "enum": [
+                      "Node",
+                      "Service",
+                      "ACME",
+                      "Unsecured"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "authority"
+                ],
+                "type": "object"
+              },
+              "http_configuration": {
+                "properties": {
+                  "initial_window_size": {
+                    "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                    "type": "string"
+                  },
+                  "max_body_size": {
+                    "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                    "type": "string"
+                  },
+                  "max_concurrent_streams_count": {
+                    "maximum": 18446744073709552000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "max_frame_size": {
+                    "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                    "type": "string"
+                  },
+                  "max_header_size": {
+                    "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$",
+                    "type": "string"
+                  },
+                  "max_headers_count": {
+                    "maximum": 4294967295,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "max_open_sessions_hard": {
+                "maximum": 18446744073709552000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "max_open_sessions_soft": {
+                "maximum": 18446744073709552000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "published_address": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bind_address"
+            ],
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "status": {
+          "$ref": "#/definitions/NodeStatus"
+        }
+      },
+      "required": [
+        "node_to_node_interface",
+        "rpc_interfaces",
+        "quote_info",
+        "encryption_pub_key",
+        "status"
+      ],
+      "type": "object"
+    },
+    "NodeStatus": {
+      "enum": [
+        "Pending",
+        "Trusted",
+        "Retired",
+        "Learner",
+        "Retiring"
+      ],
+      "type": "string"
+    },
+    "Pem": {
+      "type": "string"
+    },
+    "Proposal": {
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/Action_array"
+        }
+      },
+      "required": [
+        "actions"
+      ],
+      "type": "object"
+    },
+    "ProposalInfo": {
+      "properties": {
+        "ballots": {
+          "$ref": "#/definitions/MemberId_to_string"
+        },
+        "failure": {
+          "$ref": "#/definitions/Failure"
+        },
+        "final_votes": {
+          "$ref": "#/definitions/MemberId_to_boolean"
+        },
+        "proposer_id": {
+          "$ref": "#/definitions/MemberId"
+        },
+        "state": {
+          "$ref": "#/definitions/ProposalState"
+        },
+        "vote_failures": {
+          "$ref": "#/definitions/MemberId_to_Failure"
+        }
+      },
+      "required": [
+        "proposer_id",
+        "state",
+        "ballots"
+      ],
+      "type": "object"
+    },
+    "ProposalInfoSummary": {
+      "properties": {
+        "ballot_count": {
+          "$ref": "#/definitions/uint64"
+        },
+        "failure": {
+          "$ref": "#/definitions/Failure"
+        },
+        "proposal_id": {
+          "$ref": "#/definitions/string"
+        },
+        "proposer_id": {
+          "$ref": "#/definitions/MemberId"
+        },
+        "state": {
+          "$ref": "#/definitions/ProposalState"
+        },
+        "vote_failures": {
+          "$ref": "#/definitions/MemberId_to_Failure"
+        },
+        "votes": {
+          "$ref": "#/definitions/MemberId_to_boolean"
+        }
+      },
+      "required": [
+        "proposal_id",
+        "proposer_id",
+        "state",
+        "ballot_count"
+      ],
+      "type": "object"
+    },
+    "ProposalState": {
+      "enum": [
+        "Open",
+        "Accepted",
+        "Withdrawn",
+        "Rejected",
+        "Failed",
+        "Dropped"
+      ],
+      "type": "string"
+    },
+    "QuoteFormat": {
+      "enum": [
+        "OE_SGX_v1",
+        "Insecure_Virtual",
+        "AMD_SEV_SNP_v1"
+      ],
+      "type": "string"
+    },
+    "QuoteInfo": {
+      "properties": {
+        "endorsements": {
+          "$ref": "#/definitions/base64string"
+        },
+        "format": {
+          "$ref": "#/definitions/QuoteFormat"
+        },
+        "quote": {
+          "$ref": "#/definitions/base64string"
+        }
+      },
+      "required": [
+        "format",
+        "quote",
+        "endorsements"
+      ],
+      "type": "object"
+    },
+    "ReconfigurationType": {
+      "enum": [
+        "OneTransaction",
+        "TwoTransaction"
+      ],
+      "type": "string"
+    },
+    "ServiceConfiguration": {
+      "properties": {
+        "consensus": {
+          "$ref": "#/definitions/ConsensusType"
+        },
+        "maximum_node_certificate_validity_days": {
+          "$ref": "#/definitions/uint64"
+        },
+        "maximum_service_certificate_validity_days": {
+          "$ref": "#/definitions/uint64"
+        },
+        "recent_cose_proposals_window_size": {
+          "$ref": "#/definitions/uint64"
+        },
+        "reconfiguration_type": {
+          "$ref": "#/definitions/ReconfigurationType"
+        },
+        "recovery_threshold": {
+          "$ref": "#/definitions/uint64"
+        }
+      },
+      "required": [
+        "recovery_threshold"
+      ],
+      "type": "object"
+    },
+    "ServiceInfo": {
+      "properties": {
+        "cert": {
+          "$ref": "#/definitions/Pem"
+        },
+        "current_service_create_txid": {
+          "$ref": "#/definitions/TransactionId"
+        },
+        "previous_service_identity_version": {
+          "$ref": "#/definitions/uint64"
+        },
+        "recovery_count": {
+          "$ref": "#/definitions/uint64"
+        },
+        "service_data": {
+          "$ref": "#/definitions/json"
+        },
+        "status": {
+          "$ref": "#/definitions/ServiceStatus"
+        }
+      },
+      "required": [
+        "cert",
+        "status"
+      ],
+      "type": "object"
+    },
+    "ServiceStatus": {
+      "enum": [
+        "Opening",
+        "Open",
+        "WaitingForRecoveryShares",
+        "Recovering"
+      ],
+      "type": "string"
+    },
+    "Sha256Digest": {
+      "format": "hex",
+      "pattern": "^[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "Sha256Digest_to_string": {
+      "items": {
+        "items": {},
+        "maxItems": 2,
+        "minItems": 2,
+        "type": "array"
+      },
+      "type": "array"
+    },
+    "SignedReq": {
+      "properties": {
+        "key_id": {
+          "$ref": "#/definitions/string"
+        },
+        "md": {
+          "$ref": "#/definitions/MDType"
+        },
+        "req": {
+          "$ref": "#/definitions/base64string"
+        },
+        "request_body": {
+          "$ref": "#/definitions/base64string"
+        },
+        "sig": {
+          "$ref": "#/definitions/base64string"
+        }
+      },
+      "required": [
+        "sig",
+        "req",
+        "request_body",
+        "md",
+        "key_id"
+      ],
+      "type": "object"
+    },
+    "StateDigest": {
+      "properties": {
+        "state_digest": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "state_digest"
+      ],
+      "type": "object"
+    },
+    "SubmitRecoveryShare__In": {
+      "properties": {
+        "share": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "share"
+      ],
+      "type": "object"
+    },
+    "SubmitRecoveryShare__Out": {
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "TransactionId": {
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "type": "string"
+    },
+    "TransactionId_array": {
+      "items": {
+        "$ref": "#/definitions/TransactionId"
+      },
+      "type": "array"
+    },
+    "TxStatus": {
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Committed",
+        "Invalid"
+      ],
+      "type": "string"
+    },
+    "UserDetails": {
+      "properties": {
+        "user_data": {
+          "$ref": "#/definitions/json"
+        }
+      },
+      "required": [
+        "user_data"
+      ],
+      "type": "object"
+    },
+    "UserId_to_Pem": {
+      "additionalProperties": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "object"
+    },
+    "UserId_to_UserDetails": {
+      "additionalProperties": {
+        "$ref": "#/definitions/UserDetails"
+      },
+      "type": "object"
+    },
+    "base64string": {
+      "format": "base64",
+      "type": "string"
+    },
+    "boolean": {
+      "type": "boolean"
+    },
+    "json": {},
+    "string": {
+      "type": "string"
+    },
+    "string_to_JwtIssuerMetadata": {
+      "additionalProperties": {
+        "$ref": "#/definitions/JwtIssuerMetadata"
+      },
+      "type": "object"
+    },
+    "string_to_Pem": {
+      "additionalProperties": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "object"
+    },
+    "string_to_ProposalInfo": {
+      "additionalProperties": {
+        "$ref": "#/definitions/ProposalInfo"
+      },
+      "type": "object"
+    },
+    "string_to_base64string": {
+      "additionalProperties": {
+        "$ref": "#/definitions/base64string"
+      },
+      "type": "object"
+    },
+    "string_to_string": {
+      "additionalProperties": {
+        "$ref": "#/definitions/string"
+      },
+      "type": "object"
+    },
+    "uint64": {
+      "maximum": 18446744073709552000,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "securityDefinitions": {
+    "member_cose_sign1": {
+      "description": "Request payload must be a COSE Sign1 document, with expected protected headers. Signer must be a member identity registered with this service.",
+      "scheme": "cose_sign1",
+      "type": "http"
+    },
+    "member_signature": {
+      "description": "Request must be signed according to the HTTP Signature scheme. The signer must be a member identity registered with this service.",
+      "scheme": "signature",
+      "type": "http"
+    }
+  },
+  "x-components": {
+    "responses": {
+      "default": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/CCFError"
+            }
+          }
+        },
+        "description": "An error occurred"
+      }
+    },
+    "x-ccf-forwarding": {
+      "always": {
+        "description": "If this request is made to a backup node, it will be forwarded to the primary node for execution.",
+        "value": "always"
+      },
+      "never": {
+        "description": "This call will never be forwarded, and is always executed on the receiving node, potentially breaking session consistency. If this attempts to write on a backup, this will fail.",
+        "value": "never"
+      },
+      "sometimes": {
+        "description": "If this request is made to a backup node, it may be forwarded to the primary node for execution. Specifically, if this request is sent as part of a session which was already forwarded, then it will also be forwarded.",
+        "value": "sometimes"
+      }
+    }
+  }
+}
